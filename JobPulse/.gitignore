@@ -480,3 +480,6 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+
+#Firebase credentials Files
+**/Keys/firebase.json
