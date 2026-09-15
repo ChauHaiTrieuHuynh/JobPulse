@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/docs/">
+    <File Path="architecture.md" />
+    <File Path="configuration.md" />
+  </Folder>
+  <Project Path="JobPulse.Data/JobPulse.Data.csproj" />
+  <Project Path="JobPulse.Service/JobPulse.Service.csproj" />
+  <Project Path="JobPulse.Worker/JobPulse.Worker.csproj" />
+</Solution>
