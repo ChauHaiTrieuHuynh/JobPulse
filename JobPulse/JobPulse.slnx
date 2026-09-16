@@ -2,6 +2,7 @@
   <Folder Name="/docs/">
     <File Path="architecture.md" />
     <File Path="configuration.md" />
+    <File Path="RepositorySetup.md" />
   </Folder>
   <Project Path="JobPulse.Data/JobPulse.Data.csproj" />
   <Project Path="JobPulse.Service/JobPulse.Service.csproj" />
