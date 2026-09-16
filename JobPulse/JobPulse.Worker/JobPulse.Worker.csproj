@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\JobPulse.Data\JobPulse.Data.csproj" />
     <ProjectReference Include="..\JobPulse.Service\JobPulse.Service.csproj" />
   </ItemGroup>
 </Project>
