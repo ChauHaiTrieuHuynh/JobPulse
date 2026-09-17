@@ -1,3 +1,4 @@
+using JobPulse.Service.MapperProfile;
 using JobPulse.Worker;
 using JobPulse.Worker.Extensions;
 using JobPulse.Worker.Workers;
@@ -23,6 +24,10 @@ builder.Services.AddJobSourceService(builder.Configuration);
 
 #region Email Configuration
 builder.Services.AddEmailServices(builder.Configuration);
+#endregion
+
+#region AutoMapper Configuration
+builder.Services.AddAutoMapper(cfg => { }, typeof(AutoMapperProfile).Assembly);
 #endregion
 
 builder.Services.AddHostedService<FetchJobWorker>();

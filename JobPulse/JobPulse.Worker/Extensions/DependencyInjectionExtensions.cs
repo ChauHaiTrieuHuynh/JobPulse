@@ -23,6 +23,8 @@ namespace JobPulse.Worker.Extensions
                 client.DefaultRequestHeaders.UserAgent.ParseAdd(
                     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/152.0.0.0 Safari/537.36");
             });
+
+            services.AddScoped<IJobPulseRepository, JobPulseRepository>();
             return services;
         }
 
