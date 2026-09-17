@@ -1,4 +1,5 @@
-﻿using JobPulse.Worker.Configuration;
+﻿using JobPulse.Service.Settings;
+using JobPulse.Worker.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,8 +10,9 @@ namespace JobPulse.Worker.Extensions
     {
         public static IServiceCollection AddJobSourceService(this IServiceCollection services, IConfiguration configuration)
         {
-            return services.Configure<JobSourceSetting>(
-               configuration.GetSection("JobSources"));     
+            services.Configure<LinkedInSettings>(configuration.GetSection("JobSources:LinkedIn"));
+
+            return services;
         }
     }
 }

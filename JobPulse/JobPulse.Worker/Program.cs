@@ -1,5 +1,7 @@
 using JobPulse.Worker;
 using JobPulse.Worker.Extensions;
+using JobPulse.Worker.Workers;
+using static Google.Cloud.Firestore.V1.StructuredQuery.Types;
 
 var builder = Host.CreateApplicationBuilder(args);
 
@@ -22,6 +24,8 @@ builder.Services.AddJobSourceService(builder.Configuration);
 #region Email Configuration
 builder.Services.AddEmailServices(builder.Configuration);
 #endregion
+
+builder.Services.AddHostedService<FetchJobWorker>();
 
 var host = builder.Build();
 host.Run();
