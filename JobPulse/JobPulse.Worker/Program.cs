@@ -30,7 +30,5 @@ builder.Services.AddEmailServices(builder.Configuration);
 builder.Services.AddAutoMapper(cfg => { }, typeof(AutoMapperProfile).Assembly);
 #endregion
 
-builder.Services.AddHostedService<FetchJobWorker>();
-
 var host = builder.Build();
 host.Run();
