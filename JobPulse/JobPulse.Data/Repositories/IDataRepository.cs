@@ -1,9 +1,8 @@
-﻿using JobPulse.Service.DTOs;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace JobPulse.Service.Services
+namespace JobPulse.Data.Repositories
 {
     public interface IDataRepository<T>
     {
