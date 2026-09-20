@@ -1,6 +1,4 @@
 ﻿using Google.Cloud.Firestore;
-using JobPulse.Service.DTOs;
-using JobPulse.Service.Services;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
