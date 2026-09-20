@@ -7,7 +7,7 @@ namespace JobPulse.Service.Services
 {
     public interface IJobPulseRepository
     {
-        Task<IEnumerable<JobPostingDto>> GetJobPostingClient();
+        Task<IEnumerable<JobPostingDto>> GetLinkedInJobPostingClient();
 
     }
 }

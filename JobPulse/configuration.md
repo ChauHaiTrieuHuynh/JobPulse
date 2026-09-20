@@ -36,5 +36,6 @@
 - Polling interval: 60 minutes
 - Job source: Indeed and LinkedIn
 - Email setting: configurable
+- Worker project running in singleton -> solution is creating each polling scope to handle task -> dispose immediatelly after task done -> wait 60 minutes -> begin new polling scope
 
 

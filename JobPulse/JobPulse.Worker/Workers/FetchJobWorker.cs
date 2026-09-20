@@ -7,11 +7,12 @@ namespace JobPulse.Worker.Workers
 {
     public class FetchJobWorker : BackgroundService
     {
-        private readonly IJobSource _jobSource;
+        //factory used to create a DI new scope
+        private readonly IServiceScopeFactory _scopeFactory;
         private readonly ILogger<FetchJobWorker> _logger;
-        public FetchJobWorker(IJobSource jobSource, ILogger<FetchJobWorker> logger)
+        public FetchJobWorker(IServiceScopeFactory scopeFactory, ILogger<FetchJobWorker> logger)
         {
-            _jobSource = jobSource;
+            _scopeFactory = scopeFactory;
             _logger = logger;
         }
 
@@ -21,10 +22,13 @@ namespace JobPulse.Worker.Workers
             {
                 try
                 {
-                    string html = await _jobSource.FetchJobAsync();
-                    _logger.LogInformation(
-                                "LinkedIn response received. HTML: {html}",
-                                html);
+                    using (IServiceScope scope = _scopeFactory.CreateScope())
+                    {
+                        IJobPulseRepository jobRepo =
+                            scope.ServiceProvider.GetRequiredService<IJobPulseRepository>();
+
+                        await jobRepo.GetLinkedInJobPostingClient();
+                    } // Auto dispose after 'using'
 
                 }
                 catch (Exception ex)

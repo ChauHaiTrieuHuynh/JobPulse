@@ -10,7 +10,7 @@ namespace JobPulse.Service.DTOs
         public string Title { get; set; } = string.Empty;
         public string Company { get; set; } = string.Empty;
         public string Location { get; set; } = string.Empty;
-        public string Source { get; set; } = string.Empty;
+        public string PostedDate { get; set; } = string.Empty;
         public string JobUrl { get; set; } = string.Empty;
     }
 }
