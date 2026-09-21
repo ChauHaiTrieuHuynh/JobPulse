@@ -6,8 +6,8 @@ namespace JobPulse.Data.Repositories
 {
     public interface IDataRepository<T>
     {
-        Task AddJobAsync(T entity);
-        Task<T?> GetByIdAsync(string id);
+        Task AddJobAsync(string id, T entity);
+        Task<T?> GetByIdAndTypeAsync(string id, int jobSourceType);
         Task<IEnumerable<T>> GetAllAsync();
     }
 }

@@ -20,5 +20,7 @@ namespace JobPulse.Data.Models
         public string PostedDate { get; set; } = string.Empty;
         [FirestoreProperty]
         public string JobUrl { get; set; } = string.Empty;
+        [FirestoreProperty]
+        public int JobSourceType { get; set; }
     }
 }

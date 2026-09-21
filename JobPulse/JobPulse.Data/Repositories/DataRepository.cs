@@ -18,17 +18,26 @@ namespace JobPulse.Data.Repositories
             _logger = logger;
         }
 
-        public async Task AddJobAsync(T entity)
+        public async Task AddJobAsync(string id, T entity)
         {
             try
             {
-                if(entity == null)
+                if (entity == null)
                 {
                     throw new ArgumentNullException(nameof(entity), "The entity to add cannot be null.");
                 }
+
+                if (string.IsNullOrWhiteSpace(id))
+                {
+                    throw new ArgumentException(
+                        "Document ID cannot be null or empty.",
+                        nameof(id));
+                }
+                DocumentReference docRef = _collectionReference.Document(id);
+
                 await _collectionReference.AddAsync(entity);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError(ex, "Failed to add document ");
                 throw;
@@ -40,8 +49,8 @@ namespace JobPulse.Data.Repositories
             try
             {
                 QuerySnapshot snapshot = await _collectionReference.GetSnapshotAsync();
-                List <T> entities = new List<T>();
-                foreach(DocumentSnapshot document in snapshot.Documents)
+                List<T> entities = new List<T>();
+                foreach (DocumentSnapshot document in snapshot.Documents)
                 {
                     if (document.Exists)
                     {
@@ -58,26 +67,29 @@ namespace JobPulse.Data.Repositories
             }
         }
 
-        public async Task<T?> GetByIdAsync(string id)
+        public async Task<T?> GetByIdAndTypeAsync(string id, int jobSourceType)
         {
             try
             {
                 //validate the id parameter is not null or empty
-                if(string.IsNullOrEmpty(id))
+                if (string.IsNullOrEmpty(id))
                 {
                     throw new ArgumentException("The document ID cannot be null or empty.", nameof(id));
                 }
 
-                DocumentReference docRef = _collectionReference.Document(id);
-                DocumentSnapshot snapshot = await docRef.GetSnapshotAsync();
-                
-                if (!snapshot.Exists)
+                Query query = _collectionReference
+                        .WhereEqualTo("ExternalJobId", id)
+                        .WhereEqualTo("JobSourceType", jobSourceType);
+
+                QuerySnapshot snapshot = await query.GetSnapshotAsync();
+                if (snapshot.Count == 0)
                 {
                     return default;
                 }
 
-                return snapshot.ConvertTo<T>();
-
+                return snapshot.Documents
+                            .First()
+                            .ConvertTo<T>();
             }
             catch (Exception ex)
             {

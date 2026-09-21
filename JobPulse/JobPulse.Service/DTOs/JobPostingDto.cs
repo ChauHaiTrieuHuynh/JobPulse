@@ -12,5 +12,6 @@ namespace JobPulse.Service.DTOs
         public string Location { get; set; } = string.Empty;
         public string PostedDate { get; set; } = string.Empty;
         public string JobUrl { get; set; } = string.Empty;
+        public int JobSourceType { get; set; }
     }
 }

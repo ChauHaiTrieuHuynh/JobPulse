@@ -8,6 +8,26 @@
 ## 2. Repository Structure
 - Repository Layer: Responsible for data access and persistence.
 - Service Layer: Contains business logic and orchestrates data access.
+- Diagram including: 
+
+	FetchJobWorker
+      │
+      ▼
+IJobProcessingService       ← Worker onlyknow the processing service, not whole service implementation
+      │
+      ├── IJobSource / source services
+      │     ├── LinkedIn
+      │     └── Indeed
+      │
+      ├── Job filtering
+      │
+      ├── Duplicate checking
+      │
+      ├── IDataRepository<JobPosting>
+      │
+      ├── Email/Notification
+      │
+      └── Logging/error handling
 
 ## 3. Repository Implementation
 - Use interfaces to define repository contracts in service layer
