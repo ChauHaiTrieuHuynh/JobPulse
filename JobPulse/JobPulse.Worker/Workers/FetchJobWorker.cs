@@ -24,10 +24,10 @@ namespace JobPulse.Worker.Workers
                 {
                     using (IServiceScope scope = _scopeFactory.CreateScope())
                     {
-                        IJobPulseRepository jobRepo =
-                            scope.ServiceProvider.GetRequiredService<IJobPulseRepository>();
+                        IJobProcessingService jobProcess =
+                            scope.ServiceProvider.GetRequiredService<IJobProcessingService>();
 
-                        await jobRepo.GetLinkedInJobPostingClient();
+                        await jobProcess.ProcessJobAsync();
                     } // Auto dispose after 'using'
 
                 }

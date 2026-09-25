@@ -1,4 +1,5 @@
-﻿using JobPulse.Worker.Configuration;
+﻿using JobPulse.Service.Settings;
+using JobPulse.Worker.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Text;

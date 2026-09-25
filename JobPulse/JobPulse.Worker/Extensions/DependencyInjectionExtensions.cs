@@ -15,6 +15,8 @@ namespace JobPulse.Worker.Extensions
                 typeof(DataRepository<>));
 
             services.AddScoped<IJobSource, LinkedInJobSource>();
+            services.AddScoped<IJobProcessingService, JobProcessingService>();
+            services.AddScoped<IEmailService, EmailService>();
 
             //fetch job using addHttpClient to set user agent to avoid 403 error
             services.AddHttpClient<IJobSource, LinkedInJobSource>(client =>
@@ -24,7 +26,7 @@ namespace JobPulse.Worker.Extensions
                     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/152.0.0.0 Safari/537.36");
             });
 
-            services.AddScoped<IJobPulseRepository, JobPulseRepository>();
+            services.AddScoped<IJobPulseService, JobPulseService>();
             return services;
         }
 
