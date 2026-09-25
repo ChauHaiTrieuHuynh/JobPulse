@@ -10,11 +10,14 @@ namespace JobPulse.Service.Services
     {
         private readonly IJobPulseService _jobPulseService;
         private readonly ILogger _logger;
+        private readonly IEmailService _emailService;
 
-        public JobProcessingService(IJobPulseService jobPulseService, ILogger<JobProcessingService> logger)
+
+        public JobProcessingService(IJobPulseService jobPulseService, ILogger<JobProcessingService> logger, IEmailService emailService)
         {
             _jobPulseService = jobPulseService;
             _logger = logger;
+            _emailService = emailService;
 
         }
         public async Task ProcessJobAsync()
@@ -28,11 +31,17 @@ namespace JobPulse.Service.Services
                 // 2. Remove duplicate with db
                 var newListJobs = await _jobPulseService.FilterNewJobsAsync(linkedInJobList, indeedJobList);
 
-                _logger.LogInformation("newListJob {newListJobs}", newListJobs);
+                //_logger.LogInformation("newListJob {newListJobs}", newListJobs);
+                
                 // 3. Save the job
+                if (!newListJobs.Any())
+                {
+                    return;
+                }
+                await _jobPulseService.SaveJobsAsync(newListJobs);
 
                 // 4. Email to mobile device
-
+                await _emailService.SendEmailJobAsync(newListJobs);
             }
             catch (Exception)
             {

@@ -10,6 +10,6 @@ namespace JobPulse.Service.Services
     {
         Task<IEnumerable<JobPostingDto>> GetLinkedInJobPostingClient();
         Task<IEnumerable<JobPosting>> FilterNewJobsAsync(IEnumerable<JobPostingDto> linkedInJobsPosting, IEnumerable<JobPostingDto> indeedJobPosting);
-
+        Task SaveJobsAsync(IEnumerable<JobPosting> jobs);
     }
 }

@@ -168,5 +168,20 @@ namespace JobPulse.Service.Services
                 throw;
             }
         }
+
+        public async Task SaveJobsAsync(IEnumerable<JobPosting> jobs)
+        {
+            try
+            {
+                foreach (var job in jobs)
+                {
+                    await _repo.AddJobAsync(job.ExternalJobId, job);
+                }
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Cannot process save job in Job Pulse Service");
+            }
+        }
     }
 }
